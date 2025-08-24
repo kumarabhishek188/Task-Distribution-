@@ -1,0 +1,39 @@
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/merndb
+      - JWT_SECRET=${JWT_SECRET:-dev_secret_change_me}
+      - PORT=5000
+    depends_on:
+      - mongo
+    ports:
+      - "5050:5000"
+    volumes:
+      - ./server/uploads:/app/uploads
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:5050/api
+      - INTERNAL_API_URL=http://server:5000/api
+      - PORT=3000
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
+
+volumes:
+  mongo_data:
