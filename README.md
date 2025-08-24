@@ -3,6 +3,9 @@
 ## Overview
 A mini CRM system for managing agents and distributing tasks/leads via CSV upload.
 
+### Video Link - https://drive.google.com/file/d/17kARgt03VoWSRXyfsFqaJsDR3PF4Kr5D/view?usp=drive_link
+
+
 ### Features
 - JWT-based admin authentication
 - Agent management (add/edit/delete agents)
@@ -34,11 +37,6 @@ npm install
 npm start
 ```
 
-### Docker (recommended for easiest run)
-```
-cd /Users/banke2408/Downloads/task
-docker compose up --build
-```
 Services:
 - MongoDB: localhost:27017
 - Backend API: http://localhost:5000/api
@@ -60,4 +58,3 @@ Environment overrides:
 3. Start backend and frontend servers.
 
 ---
-For more details, see `.github/copilot-instructions.md`.
